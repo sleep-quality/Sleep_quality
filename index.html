@@ -624,9 +624,11 @@
                 msg.innerHTML = "太棒了！答對囉<br>可以丟棄一個失眠怪！";
                 msg.style.color = "var(--success-blue)"; 
                 
-                createConfetti(window.innerWidth / 2, window.innerHeight / 2);
+                if (typeof createConfetti === "function") {
+                    createConfetti(window.innerWidth / 2, window.innerHeight / 2);
+                }
                 
-                playNarration("太棒了！答對囉，可以丟棄一個失眠怪！", null, () => {
+                playNarration("太棒了！答對囉，可以丟棄一個失眠怪！", "./correct.mp3", () => {
                     showInfoModal(activeQuizInfo);
                 });
             } else {
@@ -636,7 +638,7 @@
                 msg.innerHTML = `正確答案：${correctLetter}. ${correctText}`;
                 msg.style.color = "#e74c3c"; 
                 
-                playNarration(`這題答錯了，正確答案是：選項 ${correctLetter} ， ${correctText}`, null, () => {
+                playNarration("可惜答錯囉，一起來看看睡眠小百科吧！", "./wrong.mp3", () => {
                     showInfoModal(activeQuizInfo);
                 });
             }
